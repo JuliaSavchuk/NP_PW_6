@@ -35,14 +35,14 @@ namespace NP_PW_6
                     Body = textBox_Message.Text
                 };
 
-                // Додаємо кілька адресатів (через кому)
+                // Г„Г®Г¤Г ВєГ¬Г® ГЄВіГ«ГјГЄГ  Г Г¤Г°ГҐГ±Г ГІВіГў (Г·ГҐГ°ГҐГ§ ГЄГ®Г¬Гі)
                 string[] recipients = textBox_Adressat.Text.Split(',');
                 foreach (string recipient in recipients)
                 {
                     mailMessage.To.Add(new MailAddress(recipient.Trim()));
                 }
 
-                // Додаємо вкладення
+                // Г„Г®Г¤Г ВєГ¬Г® ГўГЄГ«Г Г¤ГҐГ­Г­Гї
                 foreach (var item in listBox_Attachments.Items)
                 {
                     mailMessage.Attachments.Add(new Attachment(item.ToString()));
@@ -70,7 +70,7 @@ namespace NP_PW_6
 
         private void SmtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            //сообщение успешно отправлено
+            //Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ ГіГ±ГЇГҐГёГ­Г® Г®ГІГЇГ°Г ГўГ«ГҐГ­Г®
             if (e.Error != null)
             {
                 toolStripLabel_Info.Text = "Error: " + e.Error.Message;
@@ -110,34 +110,3 @@ namespace NP_PW_6
         }
     }
 }
-
-
-//
-//try
-//{
-//    if (string.IsNullOrWhiteSpace(textBox_Adressat.Text) ||
-//       string.IsNullOrWhiteSpace(textBox_Theme.Text) ||
-//       string.IsNullOrWhiteSpace(textBox_Message.Text))
-//    {
-//        toolStripLabel_Info.Text = "Fill in all fields.";
-//        return;
-//    }
-
-//    MailMessage mailMessage = new MailMessage();
-//    mailMessage.From = new MailAddress(textBox_Mail_Adress.Text);
-//    mailMessage.To.Add(new MailAddress(textBox_Adressat.Text));//многопользовательская рассылка
-//    mailMessage.Subject = textBox_Theme.Text;
-//    mailMessage.Body = textBox_Message.Text;
-
-//    SmtpClient smtpClient = new SmtpClient();
-//    smtpClient.Host = textBox_Host.Text;
-//    smtpClient.Port = int.Parse(textBox_Port.Text);//995
-//    smtpClient.EnableSsl = true;
-//    smtpClient.Credentials = new NetworkCredential(textBox_Mail_Adress.Text, textBox_Password.Text);
-//    smtpClient.SendCompleted += SmtpClient_SendCompleted;
-//    smtpClient.Send(mailMessage);
-//}
-//catch (Exception ex)
-//{
-//    toolStripLabel_Info.Text = ex.Message;
-//}
